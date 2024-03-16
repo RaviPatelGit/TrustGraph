@@ -11,7 +11,8 @@ Learn about nostr and nostr event at https://nostr.how/en/the-protocol and at ht
 
  
 ## User A "Trusting" user B with expiry time 1 year:
-Event structure: 
+Event structure:
+``` 
     {
         "kind": 1,
         "tags": [
@@ -23,34 +24,40 @@ Event structure:
         "content": "",
         // ..
     }
+```
 
 ## User A requesting the list of users trusted by user B:
 Event structure: 
+```
     {
         "authors": [<pubkey of user B>],
         "kinds": [1],
         "#t": ["trust"],
     }
+```
 
 ## User A requesting the list of users who is trusting user B:
-Event structure: 
+Event structure:
+```
    {
         "kinds": [1],
         "#t": ["trust"],
         "#p":[<pubkey of user B>],
     }
+```
 ## User A creating a offer visible to everyone user A is trusting:
 
 Event kind - '4'
 Send below direct messase for each user b trusted by user A.
-{
-  pubkey: <pubkey of user A>,
-  created_at: Math.floor(Date.now() / 1000),
-  kind: 4,
-  tags: [['p', <PublicKey of user b>]],
-  content: encryptedMessage + '?iv=' + ivBase64
-}
-
+```
+    {
+        pubkey: <pubkey of user A>,
+        created_at: Math.floor(Date.now() / 1000),
+        kind: 4,
+        tags: [['p', <PublicKey of user b>]],
+        content: encryptedMessage + '?iv=' + ivBase64
+    }
+```
 Find more about ivBase64 at https://github.com/nostr-protocol/nips/blob/master/04.md
 
 Plain text is stringified json of the offer content.
@@ -61,16 +68,18 @@ Plain text is stringified json of the offer content.
 ## User A requesting all the offers which are made visible to A
 
 each b1, b2, ... are from list of user trusting A
+```
    {
         "authors":[[<pubkey of user b1>,<pubkey of user b2>,...]]
         "kinds": [4],
         "#p":[<pubkey of user A>],
     }
-
+```
 ## User A requesting all the offers created by A
+```
    {
         "authors":[<pubkey of user A>]
         "kinds": [4],
         "#p":[<pubkey of user A>],
     }
-
+```
