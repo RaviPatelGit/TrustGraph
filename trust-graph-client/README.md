@@ -62,9 +62,6 @@ Find more about ivBase64 at https://github.com/nostr-protocol/nips/blob/master/0
 
 Plain text is stringified json of the offer content.
 
-
-## User A creating a offer visible to everyone user A is trusting and everyone trusted by them:
-
 ## User A requesting all the offers which are made visible to A
 
 each b1, b2, ... are from list of user trusting A
